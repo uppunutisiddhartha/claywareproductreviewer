@@ -31,7 +31,7 @@ function Login() {
             // ==========================================================
 
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/accounts/login/",
+                "https://claywarebackendapis.onrender.com/api/accounts/login/",
                 {
                     email: email.trim(),
                     password: password,
@@ -85,7 +85,7 @@ function Login() {
             // ==========================================================
 
             const userResponse = await axios.get(
-                "http://127.0.0.1:8000/api/accounts/me/",
+                "https://claywarebackendapis.onrender.com/api/accounts/me/",
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
