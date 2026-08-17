@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const api = axios.create({
-    baseURL:
-        import.meta.env.VITE_API_URL ||
-        "https://claywarebackendapis.onrender.com/api",
+console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
+console.log("MODE:", import.meta.env.MODE);
 
+const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
     headers: {
         "Content-Type": "application/json",
     },
@@ -12,20 +12,17 @@ const api = axios.create({
 
 api.interceptors.request.use(
     (config) => {
-        const token =
-            localStorage.getItem("auth_token") ||
+        const accessToken =
             localStorage.getItem("access_token");
 
-        if (token) {
+        if (accessToken) {
             config.headers.Authorization =
-                `Bearer ${token}`;
+                `Bearer ${accessToken}`;
         }
 
         return config;
     },
-    (error) => {
-        return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
 );
 
 export default api;
